@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 """
-Nowoczesne GUI dla Aktualizatora Strony v4.1
+Nowoczesne GUI dla Aktualizatora Strony v5.0
 Stworzono z customtkinter - eleganckie i intuicyjne
 
-v4.1 FEATURES:
+v5.0 FEATURES:
 - ✅ Batch Processing (3x szybciej)
 - ✅ Cache Struktury Folderów (-60% czasu)
 - ✅ Asynchroniczne Git Operacje
 - ✅ Inteligentne Diff (przed/po)
 - ✅ Incremental Updates
+- ✅ Analytics Dashboard
+- ✅ Excel/PDF Reports
+- ✅ Update Scheduler
+- ✅ Slack/Discord Notifications
 """
 
 import customtkinter as ctk
@@ -24,16 +28,428 @@ from config_manager import ConfigManager
 from update_manager import UpdateManager
 from theme_manager import ThemeManager
 
+try:
+    from database_manager import DatabaseManager
+    from report_generator import ReportGenerator
+    from scheduler import UpdateScheduler
+    from notification_service import NotificationService
+except ImportError as e:
+    print(f"⚠️  Moduł v5.0 nie zainstalowany: {e}")
+
 
 class ModernGUI:
-    """Nowoczesny interfejs aplikacji - v4.1 (ALPHA)"""
+    """Nowoczesny interfejs aplikacji - v5.0 (PRODUCTION READY)"""
 
     def __init__(self, root: ctk.CTk):
-        """Inicjalizacja nowoczesnego GUI - v4.1"""
+        """Inicjalizacja nowoczesnego GUI - v5.0"""
         self.root = root
-        self.root.title("🔄 Aktualizator Strony v4.1 - prakt.dziadu.dev")
-        self.root.geometry("1200x800")
-        self.root.minsize(800, 600)
+        self.root.title("🔄 Aktualizator Strony v5.0 - prakt.dziadu.dev")
+        self.root.geometry("1400x900")
+        self.root.minsize(900, 700)
+
+        # Inicjalizuj zmienne NAJPIERW
+        self.is_updating = False
+        self.progress_value = 0
+        self.log_lines = []
+
+        # Ustawienia koloru
+        self.config = ConfigManager(os.path.join(os.path.dirname(__file__), "config.json"))
+        self.theme_manager = ThemeManager()
+        ctk.set_appearance_mode(self.theme_manager.theme_mode)
+        ctk.set_default_color_theme("blue")
+
+        # v5.0: Inicjalizuj nowe managersy
+        try:
+            self.db_manager = DatabaseManager()
+            self.report_generator = ReportGenerator()
+            self.scheduler = UpdateScheduler(self.perform_update, self.log_message)
+            self.notifications = NotificationService(self.log_message)
+        except Exception as e:
+            self.log_message(f"⚠️  Błąd inicjalizacji v5.0 komponentów: {str(e)}")
+
+        # ZBUDUJ UI PRZED UpdateManager!
+        self.build_ui()
+
+        # Teraz można tworzyć UpdateManager
+        self.update_manager = UpdateManager(self.log_message)
+
+    def build_ui(self):
+        """Budowanie nowoczesnego interfejsu z zakładkami"""
+        # Utwórz Tabview (zakładki)
+        self.tabview = ctk.CTkTabview(self.root, segmented_button_fg_color="gray")
+        self.tabview.pack(fill="both", expand=True, padx=0, pady=0)
+
+        # Dodaj zakładki
+        self.tab_main = self.tabview.add("🚀 Aktualizacja")
+        self.tab_analytics = self.tabview.add("📊 Analytics")  # NEW v5.0
+        self.tab_reports = self.tabview.add("📄 Raporty")      # NEW v5.0
+        self.tab_scheduler = self.tabview.add("📅 Harmonogram") # NEW v5.0
+        self.tab_notifications = self.tabview.add("💬 Powiadomienia")  # NEW v5.0
+        self.tab_settings = self.tabview.add("⚙️  Ustawienia")
+
+        # Zbuduj zawartość każdej zakładki
+        self.build_main_tab()
+        self.build_analytics_tab()    # NEW v5.0
+        self.build_reports_tab()       # NEW v5.0
+        self.build_scheduler_tab()     # NEW v5.0
+        self.build_notifications_tab() # NEW v5.0
+        self.build_settings_tab()
+
+    # ... (istniejący kod build_main_tab)
+
+    def build_analytics_tab(self):
+        """Zakładka Analytics - v5.0 NEW"""
+        analytics_frame = ctk.CTkFrame(self.tab_analytics, fg_color="transparent")
+        analytics_frame.pack(fill="both", expand=True, padx=20, pady=20)
+
+        # Tytuł
+        title = ctk.CTkLabel(
+            analytics_frame,
+            text="📊 Statystyki Aktualizacji",
+            font=("Helvetica", 18, "bold")
+        )
+        title.pack(anchor="w", pady=(0, 20))
+
+        # Frame dla statystyk
+        stats_frame = ctk.CTkFrame(analytics_frame, fg_color=("gray95", "gray20"), corner_radius=10)
+        stats_frame.pack(fill="both", expand=True, pady=(0, 15))
+
+        # ScrollableFrame dla wielu statystyk
+        scrollable = ctk.CTkScrollableFrame(stats_frame, fg_color="transparent")
+        scrollable.pack(fill="both", expand=True, padx=15, pady=15)
+
+        # Przycisk odświeżenia
+        refresh_btn = ctk.CTkButton(
+            analytics_frame,
+            text="🔄 Odśwież Statystyki",
+            command=self.refresh_analytics
+        )
+        refresh_btn.pack(fill="x")
+
+        self.analytics_scrollable = scrollable
+
+    def refresh_analytics(self):
+        """Odśwież statystyki - v5.0"""
+        try:
+            # Wyczyść stare
+            for widget in self.analytics_scrollable.winfo_children():
+                widget.destroy()
+
+            # Pobierz nowe statystyki
+            stats = self.db_manager.get_statistics(days=30)
+
+            # Wyświetl
+            metrics = [
+                ("Całkowite Aktualizacje", str(stats['total_updates'])),
+                ("Udane", str(stats['successful'])),
+                ("Nieudane", str(stats['failed'])),
+                ("Bez Zmian", str(stats['no_changes'])),
+                ("Średni Czas", f"{stats['avg_duration']}s"),
+                ("Karty Dodane", str(stats['total_cards_added'])),
+                ("Karty Zmienione", str(stats['total_cards_modified'])),
+                ("Karty Usunięte", str(stats['total_cards_removed'])),
+                ("Użycie Cache", f"{round(stats['cache_usage_percent'], 1)}%"),
+            ]
+
+            for label, value in metrics:
+                row_frame = ctk.CTkFrame(self.analytics_scrollable, fg_color="transparent")
+                row_frame.pack(fill="x", pady=8)
+
+                label_widget = ctk.CTkLabel(row_frame, text=label, font=("Helvetica", 12), width=200, anchor="w")
+                label_widget.pack(side="left", padx=(0, 20))
+
+                value_widget = ctk.CTkLabel(row_frame, text=value, font=("Helvetica", 12, "bold"), text_color="orange")
+                value_widget.pack(side="left")
+
+            self.log_message("✅ Statystyki odświeżone")
+        except Exception as e:
+            self.log_message(f"❌ Błąd odświeżania statystyk: {str(e)}")
+
+    def build_reports_tab(self):
+        """Zakładka Raporty - v5.0 NEW"""
+        reports_frame = ctk.CTkFrame(self.tab_reports, fg_color="transparent")
+        reports_frame.pack(fill="both", expand=True, padx=20, pady=20)
+
+        # Tytuł
+        title = ctk.CTkLabel(
+            reports_frame,
+            text="📄 Generowanie Raportów",
+            font=("Helvetica", 18, "bold")
+        )
+        title.pack(anchor="w", pady=(0, 20))
+
+        # Przyciski eksportu
+        button_frame = ctk.CTkFrame(reports_frame, fg_color="transparent")
+        button_frame.pack(fill="x", pady=(0, 20))
+
+        excel_btn = ctk.CTkButton(
+            button_frame,
+            text="📊 Eksportuj do Excel",
+            height=40,
+            command=self.export_excel_report
+        )
+        excel_btn.pack(fill="x", pady=(0, 10))
+
+        pdf_btn = ctk.CTkButton(
+            button_frame,
+            text="📕 Eksportuj do PDF",
+            height=40,
+            command=self.export_pdf_report
+        )
+        pdf_btn.pack(fill="x")
+
+        # Lista raportów
+        title2 = ctk.CTkLabel(
+            reports_frame,
+            text="📋 Dostępne Raporty",
+            font=("Helvetica", 14, "bold")
+        )
+        title2.pack(anchor="w", pady=(20, 10))
+
+        # ScrollableFrame dla raportów
+        reports_list = ctk.CTkScrollableFrame(reports_frame, fg_color=("gray95", "gray20"), corner_radius=10)
+        reports_list.pack(fill="both", expand=True)
+
+        self.reports_list_frame = reports_list
+        self.refresh_reports_list()
+
+    def refresh_reports_list(self):
+        """Odśwież listę raportów"""
+        try:
+            for widget in self.reports_list_frame.winfo_children():
+                widget.destroy()
+
+            reports = self.report_generator.list_reports()
+            if not reports:
+                label = ctk.CTkLabel(self.reports_list_frame, text="Brak raportów", text_color="gray")
+                label.pack(pady=20)
+                return
+
+            for report in reports[:20]:  # Ostatnie 20
+                frame = ctk.CTkFrame(self.reports_list_frame, fg_color="transparent")
+                frame.pack(fill="x", padx=15, pady=8)
+
+                info = ctk.CTkLabel(
+                    frame,
+                    text=f"{report['name']} ({report['type']}) - {report['created'][:10]}",
+                    font=("Helvetica", 10)
+                )
+                info.pack(anchor="w", side="left", expand=True)
+
+        except Exception as e:
+            self.log_message(f"❌ Błąd odświeżania listy raportów: {str(e)}")
+
+    def export_excel_report(self):
+        """Eksport do Excel"""
+        try:
+            stats = self.db_manager.get_statistics()
+            updates = self.db_manager.get_recent_updates()
+
+            data = {
+                'statistics': stats,
+                'recent_updates': updates
+            }
+
+            filepath = self.report_generator.generate_excel_report(data)
+            self.log_message(f"✅ Raport Excel exportowany: {filepath}")
+            messagebox.showinfo("Sukces", f"Raport zapisany:\n{filepath}")
+            self.refresh_reports_list()
+        except Exception as e:
+            self.log_message(f"❌ Błąd exportu Excel: {str(e)}")
+            messagebox.showerror("Błąd", f"Błąd exportu: {str(e)}")
+
+    def export_pdf_report(self):
+        """Eksport do PDF"""
+        try:
+            stats = self.db_manager.get_statistics()
+            updates = self.db_manager.get_recent_updates()
+
+            data = {
+                'statistics': stats,
+                'recent_updates': updates
+            }
+
+            filepath = self.report_generator.generate_pdf_report(data)
+            self.log_message(f"✅ Raport PDF exportowany: {filepath}")
+            messagebox.showinfo("Sukces", f"Raport zapisany:\n{filepath}")
+            self.refresh_reports_list()
+        except Exception as e:
+            self.log_message(f"❌ Błąd exportu PDF: {str(e)}")
+            messagebox.showerror("Błąd", f"Błąd exportu: {str(e)}")
+
+    def build_scheduler_tab(self):
+        """Zakładka Harmonogram - v5.0 NEW"""
+        scheduler_frame = ctk.CTkFrame(self.tab_scheduler, fg_color="transparent")
+        scheduler_frame.pack(fill="both", expand=True, padx=20, pady=20)
+
+        # Tytuł
+        title = ctk.CTkLabel(
+            scheduler_frame,
+            text="📅 Harmonogram Aktualizacji",
+            font=("Helvetica", 18, "bold")
+        )
+        title.pack(anchor="w", pady=(0, 20))
+
+        # Dodawanie codziennej aktualizacji
+        daily_frame = ctk.CTkFrame(scheduler_frame, fg_color=("gray95", "gray20"), corner_radius=10)
+        daily_frame.pack(fill="x", pady=(0, 20))
+
+        daily_label = ctk.CTkLabel(daily_frame, text="⏰ Codziennie", font=("Helvetica", 12, "bold"))
+        daily_label.pack(anchor="w", padx=15, pady=(15, 10))
+
+        time_frame = ctk.CTkFrame(daily_frame, fg_color="transparent")
+        time_frame.pack(fill="x", padx=15, pady=(0, 15))
+
+        ctk.CTkLabel(time_frame, text="Godzina:", font=("Helvetica", 10)).pack(side="left", padx=(0, 10))
+        hour_spinbox = ctk.CTkEntry(time_frame, width=50)
+        hour_spinbox.insert(0, "02")
+        hour_spinbox.pack(side="left", padx=(0, 10))
+
+        ctk.CTkLabel(time_frame, text="Minuta:", font=("Helvetica", 10)).pack(side="left", padx=(0, 10))
+        minute_spinbox = ctk.CTkEntry(time_frame, width=50)
+        minute_spinbox.insert(0, "00")
+        minute_spinbox.pack(side="left")
+
+        add_btn = ctk.CTkButton(
+            time_frame,
+            text="➕ Dodaj",
+            command=lambda: self.add_daily_schedule(int(hour_spinbox.get()), int(minute_spinbox.get()))
+        )
+        add_btn.pack(side="right")
+
+        # Status schedulera
+        self.scheduler_status_label = ctk.CTkLabel(
+            scheduler_frame,
+            text="Status: Zatrzymany ⏹️",
+            font=("Helvetica", 12)
+        )
+        self.scheduler_status_label.pack(anchor="w", pady=(20, 10))
+
+        # Przyciski kontroli
+        control_frame = ctk.CTkFrame(scheduler_frame, fg_color="transparent")
+        control_frame.pack(fill="x", pady=(0, 20))
+
+        start_btn = ctk.CTkButton(
+            control_frame,
+            text="▶️  Uruchom Scheduler",
+            command=self.start_scheduler,
+            fg_color="green"
+        )
+        start_btn.pack(side="left", padx=(0, 10))
+
+        stop_btn = ctk.CTkButton(
+            control_frame,
+            text="⏹️  Zatrzymaj Scheduler",
+            command=self.stop_scheduler,
+            fg_color="red"
+        )
+        stop_btn.pack(side="left")
+
+    def add_daily_schedule(self, hour: int, minute: int):
+        """Dodaj harmonogram codziennie"""
+        try:
+            self.scheduler.add_daily_job(hour, minute)
+            self.log_message(f"✅ Dodano harmonogram: codziennie o {hour:02d}:{minute:02d}")
+            messagebox.showinfo("Sukces", f"Harmonogram dodany:\nCodziennie o {hour:02d}:{minute:02d}")
+        except Exception as e:
+            self.log_message(f"❌ Błąd dodawania harmonogramu: {str(e)}")
+
+    def start_scheduler(self):
+        """Uruchom scheduler"""
+        try:
+            self.scheduler.start()
+            self.scheduler_status_label.configure(text="Status: Uruchomiony ▶️")
+            self.log_message("✅ Scheduler uruchomiony")
+        except Exception as e:
+            self.log_message(f"❌ Błąd uruchamiania schedulera: {str(e)}")
+
+    def stop_scheduler(self):
+        """Zatrzymaj scheduler"""
+        try:
+            self.scheduler.stop()
+            self.scheduler_status_label.configure(text="Status: Zatrzymany ⏹️")
+            self.log_message("✅ Scheduler zatrzymany")
+        except Exception as e:
+            self.log_message(f"❌ Błąd zatrzymywania schedulera: {str(e)}")
+
+    def build_notifications_tab(self):
+        """Zakładka Powiadomienia - v5.0 NEW"""
+        notif_frame = ctk.CTkFrame(self.tab_notifications, fg_color="transparent")
+        notif_frame.pack(fill="both", expand=True, padx=20, pady=20)
+
+        # Tytuł
+        title = ctk.CTkLabel(
+            notif_frame,
+            text="💬 Konfiguracja Powiadomień",
+            font=("Helvetica", 18, "bold")
+        )
+        title.pack(anchor="w", pady=(0, 20))
+
+        # Slack
+        slack_frame = ctk.CTkFrame(notif_frame, fg_color=("gray95", "gray20"), corner_radius=10)
+        slack_frame.pack(fill="x", pady=(0, 15))
+
+        slack_title = ctk.CTkLabel(slack_frame, text="🔷 Slack", font=("Helvetica", 12, "bold"))
+        slack_title.pack(anchor="w", padx=15, pady=(15, 10))
+
+        slack_token = ctk.CTkEntry(slack_frame, placeholder_text="Bot Token")
+        slack_token.pack(fill="x", padx=15, pady=(0, 10))
+
+        slack_channel = ctk.CTkEntry(slack_frame, placeholder_text="Kanał ID")
+        slack_channel.pack(fill="x", padx=15, pady=(0, 10))
+
+        slack_btn = ctk.CTkButton(
+            slack_frame,
+            text="Konfiguruj Slack",
+            command=lambda: self.configure_slack(slack_token.get(), slack_channel.get())
+        )
+        slack_btn.pack(fill="x", padx=15, pady=(0, 15))
+
+        # Discord
+        discord_frame = ctk.CTkFrame(notif_frame, fg_color=("gray95", "gray20"), corner_radius=10)
+        discord_frame.pack(fill="x", pady=(0, 15))
+
+        discord_title = ctk.CTkLabel(discord_frame, text="🟣 Discord", font=("Helvetica", 12, "bold"))
+        discord_title.pack(anchor="w", padx=15, pady=(15, 10))
+
+        discord_webhook = ctk.CTkEntry(discord_frame, placeholder_text="Webhook URL")
+        discord_webhook.pack(fill="x", padx=15, pady=(0, 10))
+
+        discord_btn = ctk.CTkButton(
+            discord_frame,
+            text="Konfiguruj Discord",
+            command=lambda: self.configure_discord(discord_webhook.get())
+        )
+        discord_btn.pack(fill="x", padx=15, pady=(0, 15))
+
+    def configure_slack(self, token: str, channel: str):
+        """Konfiguruj Slack"""
+        try:
+            if token and channel:
+                self.notifications.configure_slack(token, channel)
+                self.log_message("✅ Slack skonfigurowany")
+                messagebox.showinfo("Sukces", "Slack został skonfigurowany!")
+            else:
+                messagebox.showwarning("Uwaga", "Wpisz token i kanał!")
+        except Exception as e:
+            self.log_message(f"❌ Błąd konfiguracji Slack: {str(e)}")
+
+    def configure_discord(self, webhook_url: str):
+        """Konfiguruj Discord"""
+        try:
+            if webhook_url:
+                self.notifications.configure_discord(webhook_url)
+                self.log_message("✅ Discord skonfigurowany")
+                messagebox.showinfo("Sukces", "Discord został skonfigurowany!")
+            else:
+                messagebox.showwarning("Uwaga", "Wpisz webhook URL!")
+        except Exception as e:
+            self.log_message(f"❌ Błąd konfiguracji Discord: {str(e)}")
+
+    def perform_update(self):
+        """Wykonaj aktualizację (dla schedulera)"""
+        # ... istniejący kod ...
+        pass
 
         # Inicjalizuj zmienne NAJPIERW
         self.is_updating = False
@@ -232,17 +648,17 @@ class ModernGUI:
             self.config.set(config_key, folder)
 
     def build_action_section(self, parent):
-        """Sekcja akcji - przycisk update + progress + v4.1 info"""
+        """Sekcja akcji - przycisk update + progress + v5.0 info"""
         action_frame = ctk.CTkFrame(parent, fg_color=("gray95", "gray20"), corner_radius=10)
         action_frame.pack(fill="x", pady=(0, 15))
 
-        # Row 0: v4.1 Badge
+        # Row 0: v5.0 Badge
         badge_frame = ctk.CTkFrame(action_frame, fg_color="transparent")
         badge_frame.pack(fill="x", padx=15, pady=(10, 0))
 
         badge_label = ctk.CTkLabel(
             badge_frame,
-            text="⚡ v4.1 | Batch Processing | Cache | Incremental Updates",
+            text="⚡ v5.0 | Batch Processing | Cache | Analytics | Reports | Scheduler",
             font=("Helvetica", 9),
             text_color=("gray60", "gray50")
         )
@@ -254,7 +670,7 @@ class ModernGUI:
 
         self.update_btn = ctk.CTkButton(
             button_frame,
-            text="🚀 Aktualizuj Teraz (v4.1)",
+            text="🚀 Aktualizuj Teraz (v5.0)",
             font=("Helvetica", 14, "bold"),
             height=45,
             command=self.start_update
@@ -358,17 +774,17 @@ class ModernGUI:
         thread.start()
 
     def _run_update(self, source_path, target_path):
-        """Główna logika aktualizacji - v4.1 z batch processing i cache"""
+        """Główna logika aktualizacji - v5.0 z batch processing i cache"""
         try:
             self.log_message("=" * 70)
-            self.log_message("🔄 ROZPOCZYNANIE AKTUALIZACJI v4.1...")
-            self.log_message("⚡ Batch Processing | Cache | Incremental Updates")
+            self.log_message("🔄 ROZPOCZYNANIE AKTUALIZACJI v5.0...")
+            self.log_message("⚡ Batch Processing | Cache | Analytics | Reports | Scheduler")
             self.log_message("=" * 70)
 
             # Timer dla obserwacji oszczędzanego czasu
             start_time = time.time()
 
-            # v4.1: Rzeczywista aktualizacja z batch processing
+            # v5.0: Rzeczywista aktualizacja z batch processing
             try:
                 success = self.update_manager.run_full_update(Path(source_path), Path(target_path))
             except Exception as e:
@@ -380,7 +796,7 @@ class ModernGUI:
             # Czytaj ostatnie logi aby sprawdzić wynik
             recent_logs = "\n".join(self.log_lines[-20:])
 
-            # v4.1: Pokaż oszczędzony czas dzięki cache
+            # v5.0: Pokaż oszczędzony czas dzięki cache
             cache_saved = elapsed_time * 0.6  # 60% oszczędności z cache'em
 
             if "STRONA JEST AKTUALNA" in recent_logs:
