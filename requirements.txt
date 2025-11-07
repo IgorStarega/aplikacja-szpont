@@ -1,0 +1,35 @@
+# Aktualizator Strony - prakt.dziadu.dev
+# Wymagania
+
+# Główna aplikacja
+# Python 3.7+ - wbudowany Tkinter
+
+# Zależności
+beautifulsoup4>=4.9.0  # Parsowanie HTML
+python-dotenv>=0.19.0  # Environment variables (.env support) - v4.0
+customtkinter>=5.0.0   # Modern Dark/Light Mode GUI - v4.0
+
+# Narzędzia dla developers
+pytest>=6.0.0          # Unit testy
+pytest-cov>=2.10.0     # Coverage raport
+
+# Biblioteki standardowe (wbudowane w Python):
+# - tkinter (GUI)
+# - subprocess (obsługa Git)
+# - pathlib (zarządzanie ścieżkami)
+# - json (konfiguracja)
+# - threading (wątki)
+# - datetime (data/czas)
+# - re (wyrażenia regularne)
+# - logging (logowanie)
+# - shutil (operacje na plikach)
+
+# Aby zainstalować zależności:
+# pip install -r requirements.txt
+
+# Aby uruchomić testy:
+# pytest tests/ -v
+
+# Aby uruchomić:
+# python apk.py
+

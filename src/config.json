@@ -1,0 +1,11 @@
+{
+  "SOURCE_REPO_PATH": "C:\\Users\\stare\\szkola25-26",
+  "TARGET_REPO_PATH": "C:\\Users\\stare\\strona dziadu-dev",
+  "auto_update_enabled": false,
+  "auto_update_interval": 60,
+  "auto_update_interval_unit": "minutes",
+  "last_update": null,
+  "update_history": [],
+  "theme": "dark",
+  "log_level": "INFO"
+}
