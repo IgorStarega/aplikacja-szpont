@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Nowoczesne GUI dla Aktualizatora Strony v5.0
+Nowoczesne GUI dla Aktualizatora Strony v5.1
 Stworzono z customtkinter - eleganckie i intuicyjne
 
 v5.0 FEATURES:
@@ -13,6 +13,13 @@ v5.0 FEATURES:
 - ✅ Excel/PDF Reports
 - ✅ Update Scheduler
 - ✅ Slack/Discord Notifications
+
+v5.1 NEW FEATURES:
+- ✅ Web Dashboard (Flask)
+- ✅ REST API
+- ✅ Webhook Integration
+- ✅ SSH Key Support
+- ✅ Git Credentials Manager
 """
 
 import customtkinter as ctk
@@ -33,17 +40,23 @@ try:
     from report_generator import ReportGenerator
     from scheduler import UpdateScheduler
     from notification_service import NotificationService
+    # v5.1 NEW imports
+    from web_dashboard import WebDashboard
+    from api_manager import APIManager
+    from webhook_manager import WebhookManager
+    from ssh_manager import SSHManager
+    from credentials_manager import CredentialsManager
 except ImportError as e:
-    print(f"⚠️  Moduł v5.0 nie zainstalowany: {e}")
+    print(f"⚠️  Moduł nie zainstalowany: {e}")
 
 
 class ModernGUI:
-    """Nowoczesny interfejs aplikacji - v5.0 (PRODUCTION READY)"""
+    """Nowoczesny interfejs aplikacji - v5.1 (PRODUCTION READY)"""
 
     def __init__(self, root: ctk.CTk):
-        """Inicjalizacja nowoczesnego GUI - v5.0"""
+        """Inicjalizacja nowoczesnego GUI - v5.1"""
         self.root = root
-        self.root.title("🔄 Aktualizator Strony v5.0 - prakt.dziadu.dev")
+        self.root.title("🔄 Aktualizator Strony v5.1 - prakt.dziadu.dev")
         self.root.geometry("1400x900")
         self.root.minsize(900, 700)
 
@@ -58,7 +71,10 @@ class ModernGUI:
         ctk.set_appearance_mode(self.theme_manager.theme_mode)
         ctk.set_default_color_theme("blue")
 
-        # v5.0: Inicjalizuj nowe managersy
+        # ZBUDUJ UI NAJPIERW - log_text MUSI być dostępny!
+        self.build_ui()
+
+        # v5.0: Inicjalizuj nowe managersy (TERAZ log_text jest dostępny!)
         try:
             self.db_manager = DatabaseManager()
             self.report_generator = ReportGenerator()
@@ -67,11 +83,21 @@ class ModernGUI:
         except Exception as e:
             self.log_message(f"⚠️  Błąd inicjalizacji v5.0 komponentów: {str(e)}")
 
-        # ZBUDUJ UI PRZED UpdateManager!
-        self.build_ui()
+        # v5.1: Inicjalizuj nowe managersy (OPCJONALNE na razie)
+        try:
+            self.web_dashboard = None  # Będzie włączone z GUI
+            self.api_manager = None     # Będzie włączone z GUI
+            self.webhook_manager = None # Będzie włączone z GUI
+            self.ssh_manager = None     # Będzie włączone z GUI
+            self.credentials_manager = None  # Będzie włączone z GUI
+            # self.log_message("✅ v5.1 moduły dostępne")
+        except Exception as e:
+            self.log_message(f"⚠️  Błąd inicjalizacji v5.1 komponentów: {str(e)}")
+
 
         # Teraz można tworzyć UpdateManager
         self.update_manager = UpdateManager(self.log_message)
+
 
     def build_ui(self):
         """Budowanie nowoczesnego interfejsu z zakładkami"""

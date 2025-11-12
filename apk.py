@@ -2,7 +2,7 @@
 Aktualizator Strony - dziadu.dev
 Główny punkt wejścia aplikacji
 
-Wersja: 5.0 (PRODUCTION READY)
+Wersja: 5.1 (PRODUCTION READY)
 Status: ✅ GOTOWA DO UŻYTKU
 
 Cechy v4.1:

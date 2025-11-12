@@ -1,8 +1,8 @@
-# 🔄 Aktualizator Strony - v5.0 PRODUCTION READY
+# 🔄 Aktualizator Strony - v5.1 PRODUCTION READY
 
 **Nowoczesna aplikacja do automatycznego aktualizowania strony internetowej na bazie repozytorium GitHub.**
 
-![Version](https://img.shields.io/badge/version-5.0-blue)
+![Version](https://img.shields.io/badge/version-5.1-blue)
 ![Python](https://img.shields.io/badge/python-3.7+-green)
 ![Status](https://img.shields.io/badge/status-PRODUCTION%20READY-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
@@ -16,6 +16,7 @@
 - **Caching**: -60% czasu skanowania (MD5 hashing)
 - **Async Git**: GUI zawsze responsywne (0% freezing)
 - **Incremental Updates**: Powtórne aktualizacje 12-25x szybciej!
+- **Natural Sort**: Zadania sortowane numerycznie (Zadanie1, 2, 3, 10 zamiast 1, 10, 2, 3)
 
 ### 📊 Analytics & Reporting (v5.0 NEW)
 - **SQLite Historia**: Baza danych wszystkich aktualizacji
@@ -32,6 +33,18 @@
 - **Slack Integration**: Powiadomienia na Slack
 - **Discord Integration**: Embeds na Discord
 - **Email Reports**: Wysyłanie raportów email
+
+### 🌐 Web & API (v5.1 NEW)
+- **Flask Web Dashboard**: Zarządzanie z przeglądarki
+- **REST API**: Programistyczne sterowanie
+- **GitHub Webhooks**: Automatyczne wyzwalanie przy push'u
+- **WebSocket Updates**: Real-time aktualizacje
+
+### 🔐 Security (v5.1 NEW)
+- **SSH Key Management**: Bezpieczne klucze SSH
+- **Git Credentials**: Szyfrowane hasła i tokeny
+- **Encrypted Storage**: AES-256 encryption
+- **Credential Rotation**: Zmiana haseł
 
 ### 🎨 GUI
 - **Nowoczesny Interfejs**: customtkinter (elegancki Tkinter)

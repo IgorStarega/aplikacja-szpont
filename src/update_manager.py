@@ -32,6 +32,28 @@ import logging
 from logging.handlers import RotatingFileHandler
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+
+def natural_sort_key(text):
+    """
+    Konwertuje string do klucza sortowania z naturalnym sortowaniem numerów.
+    Przykład: zadanie1, zadanie2, zadanie10 zamiast zadanie1, zadanie10, zadanie2
+
+    Args:
+        text: String (lub Path) do posortowania
+
+    Returns:
+        Krotka do użycia w sorted()
+    """
+    if isinstance(text, Path):
+        text = text.name
+
+    # Rozbij tekst na części alfanumeryczne
+    def convert(part):
+        return int(part) if part.isdigit() else part.lower()
+
+    return [convert(part) for part in re.split(r'(\d+)', str(text))]
+
+
 class UpdateManager:
     """Manager aktualizacji zawartości HTML - WERSJA 4.1 (Production Ready - Alpha)"""
 
@@ -284,7 +306,7 @@ class UpdateManager:
             self.log(f"  ⚠️  Folder nie istnieje: {folder_path}")
             return structure
         
-        for item in sorted(folder_path.iterdir()):
+        for item in sorted(folder_path.iterdir(), key=natural_sort_key):
             if item.name.startswith('.'):
                 continue
             
@@ -306,15 +328,15 @@ class UpdateManager:
         subdirs = [d for d in section_path.iterdir() if d.is_dir() and not d.name.startswith('.')]
         
         if html_files and not subdirs:
-            for html_file in sorted(html_files):
+            for html_file in sorted(html_files, key=natural_sort_key):
                 self._add_task(structure, section_name, "", html_file, folder_name)
         elif subdirs and not html_files:
-            for subdir in sorted(subdirs):
+            for subdir in sorted(subdirs, key=natural_sort_key):
                 self._process_subsection(structure, section_name, subdir, folder_name)
         elif html_files and subdirs:
-            for html_file in sorted(html_files):
+            for html_file in sorted(html_files, key=natural_sort_key):
                 self._add_task(structure, section_name, "", html_file, folder_name)
-            for subdir in sorted(subdirs):
+            for subdir in sorted(subdirs, key=natural_sort_key):
                 self._process_subsection(structure, section_name, subdir, folder_name)
 
     def _process_subsection(self, structure: Dict, section_name: str, subsection_path: Path, folder_name: str):
@@ -326,7 +348,7 @@ class UpdateManager:
         if index_file.exists():
             self._add_task(structure, section_name, subsection_name, subsection_path, folder_name)
         elif subfolders:
-            for subfolder in sorted(subfolders):
+            for subfolder in sorted(subfolders, key=natural_sort_key):
                 self._add_task(structure, section_name, subsection_name, subfolder, folder_name)
 
     def _add_task(self, structure: Dict, section_name: str, subsection_name: str, item_path: Path, folder_name: str):
@@ -557,6 +579,46 @@ class UpdateManager:
 
         return removed_count
 
+    def sort_cards_in_section(self, container) -> int:
+        """
+        ⭐ NOWE: Sortuje karty wewnątrz każdej sekcji naturalnie (numerycznie)
+
+        Args:
+            container: BeautifulSoup container
+
+        Returns:
+            Liczba posortowanych sekcji
+        """
+        sorted_count = 0
+
+        # Szukaj wszystkich div.row (kontenerów na karty)
+        row_containers = container.find_all('div', class_=lambda x: x and 'row' in x)
+
+        for row in row_containers:
+            # Pobierz wszystkie karty (col-sm-6) w tym rządku
+            cards = list(row.find_all('div', class_=lambda x: x and 'col-sm-6' in x, recursive=False))
+
+            if len(cards) > 1:
+                # Posortuj karty na podstawie tytułu (h3.fs-5)
+                sorted_cards = sorted(cards, key=lambda card: natural_sort_key(
+                    card.find('h3', {'class': 'fs-5'}).get_text(strip=True)
+                    if card.find('h3', {'class': 'fs-5'}) else ""
+                ))
+
+                # Jeśli kolejność się zmieniła, zmień ją w miejscu
+                if [id(c) for c in cards] != [id(c) for c in sorted_cards]:
+                    # Usuń wszystkie karty z rządu
+                    for card in cards:
+                        card.extract()
+
+                    # Dodaj je ponownie w posortowanej kolejności
+                    for card in sorted_cards:
+                        row.append(card)
+
+                    sorted_count += 1
+
+        return sorted_count
+
     def update_html_file(self, html_path: Path, source_path: Path, folder_name: str) -> bool:
         """
         Aktualizuje plik HTML z obsługą błędów
@@ -620,10 +682,17 @@ class UpdateManager:
                 if not items:
                     continue
 
-                for item in items:
+                # Posortuj items wewnątrz sekcji - zmienia się tu na natural sort
+                sorted_items = sorted(items, key=lambda x: natural_sort_key(
+                    x.get("name", x.get("title", ""))
+                ))
+
+                for item in sorted_items:
                     try:
                         if item.get("type") == "subsection":
-                            for task in item.get("tasks", []):
+                            # Posortuj tasks wewnątrz subsection
+                            sorted_tasks = sorted(item.get("tasks", []), key=lambda t: natural_sort_key(t['title']))
+                            for task in sorted_tasks:
                                 all_valid_urls.add(task['url'])
                                 if task['url'] not in self.seen_urls:
                                     if self._add_card_to_html(container, soup, section_name, item.get("name"), task):
@@ -644,6 +713,11 @@ class UpdateManager:
 
             # Usuń puste sekcje
             empty_sections_removed = self.remove_empty_sections(container)
+
+            # Posortuj karty wewnątrz każdej sekcji
+            sorted_count = self.sort_cards_in_section(container)
+            if sorted_count > 0:
+                self.log(f"  📊 Posortowano karty w {sorted_count} sekcjach")
 
             # Zapisz plik z obsługą błędów
             try:
@@ -791,7 +865,7 @@ class UpdateManager:
         self.log("\n📝 Aktualizowanie plików HTML:")
         changes_found = False  # Tracker zmian (NOWE v4.0)
 
-        for folder in sorted(self.ALLOWED_FOLDERS):
+        for folder in sorted(self.ALLOWED_FOLDERS, key=natural_sort_key):
             html_file = target_path / f"{folder}.html"
             if html_file.exists():
                 if self.update_html_file(html_file, source_path, folder):

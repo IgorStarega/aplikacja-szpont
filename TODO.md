@@ -1,10 +1,12 @@
-# 📋 TODO i Mapa Drogowa - v5.0 PRODUCTION READY
+# 📋 TODO i Mapa Drogowa - v5.1 PRODUCTION READY
 
-## ✅ STATUS: v5.0 GOTOWA DO PRODUKCJI!
+## ✅ STATUS: v5.1 GOTOWA DO PRODUKCJI!
+
+**Aplikacja v5.1 + Natural Sort (v4.1+) jest w pełni testowana i gotowa do użytku.**
 
 ---
 
-## 🎯 CO ZROBIONO
+## 🎯 CO ZROBIONO (v4.1 - v5.1)
 
 ### ✅ v4.1 Features (GOTOWE)
 - ✅ Batch Processing (+3x szybciej)
@@ -12,6 +14,7 @@
 - ✅ Asynchroniczne Git Operacje (GUI responsywne)
 - ✅ Inteligentne Różnicowanie (porównywanie HTML)
 - ✅ Incremental Updates (tylko zmieniane foldery)
+- ✅ Natural Sort (Zadanie1, Zadanie2, Zadanie10 zamiast 1, 10, 2)
 
 ### ✅ v5.0 Features (GOTOWE)
 - ✅ SQLite Historia Aktualizacji (database_manager.py)
@@ -23,6 +26,13 @@
 - ✅ Email Reports (notification_service.py)
 - ✅ Database Cleanup (auto-remove >90 dni)
 
+### ✅ v5.1 Features (GOTOWE)
+- ✅ Web Dashboard (Flask) (web_dashboard.py)
+- ✅ REST API Endpoints (api_manager.py)
+- ✅ GitHub Webhook Integration (webhook_manager.py)
+- ✅ SSH Key Management (ssh_manager.py)
+- ✅ Git Credentials Manager (credentials_manager.py)
+
 ### ✅ GUI Updates (v5.0)
 - ✅ 7 Zakładek (Aktualizacja, Analytics, Raporty, Harmonogram, Powiadomienia, Ustawienia)
 - ✅ SQLite Historia z real-time statystykami
@@ -32,29 +42,31 @@
 
 ---
 
-## 📊 Statystyka v5.0
+## 📊 Statystyka v5.1
 
 | Aspekt | Wartość |
 |--------|---------|
-| **Wersja** | 5.0 |
+| **Wersja** | 5.1 |
 | **Status** | ✅ PRODUCTION READY |
-| **Linie Kodu** | ~4500+ |
-| **Nowe Moduły** | 4 (database_manager, report_generator, scheduler, notification_service) |
+| **Linie Kodu** | ~5500+ |
+| **Moduły** | 13 (dodano 5 dla v5.1) |
 | **GUI Zakładek** | 7 |
-| **Features** | 18+ |
+| **Features** | 23+ |
 | **Performance** | +5x szybciej z Analytics |
 | **Database** | ✅ SQLite |
 | **Notifications** | ✅ 3x (Slack, Discord, Email) |
+| **Web/API** | ✅ Flask + REST API |
 
 ---
 
-## 🗂️ Nowe Pliki (v5.0)
+## 🗂️ Nowe Pliki (v5.1)
 
-### Moduły
-- ✅ `src/database_manager.py` - SQLite ORM (SQLAlchemy)
-- ✅ `src/report_generator.py` - Excel/PDF Reports
-- ✅ `src/scheduler.py` - Update Scheduler (schedule lib)
-- ✅ `src/notification_service.py` - Slack/Discord/Email
+### Moduły v5.1
+- ✅ `src/web_dashboard.py` - Flask Web Dashboard
+- ✅ `src/api_manager.py` - REST API Endpoints
+- ✅ `src/webhook_manager.py` - GitHub Webhook Integration
+- ✅ `src/ssh_manager.py` - SSH Key Management
+- ✅ `src/credentials_manager.py` - Git Credentials Manager
 
 ### Dokumentacja
 - ✅ `CHANGELOG.md` - Historia zmian wszystkich wersji
@@ -68,41 +80,7 @@
 
 ## 🚀 Przyszłe Usprawnienia
 
-### 🟡 v5.1 (Q1 2026 - Planowany)
-
-#### 1. Web Dashboard (Flask)
-- **Opis:** Web panel do zarządzania aplikacją
-- **Zysk:** Dostęp z przeglądarki (nie trzeba GUI)
-- **Czas:** ~4h
-- **Status:** ⏳ Zaplanowany
-
-#### 2. REST API
-- **Opis:** API REST do integracji z innymi systemami
-- **Zysk:** Programistyczne sterowanie
-- **Czas:** ~3h
-- **Status:** ⏳ Zaplanowany
-
-#### 3. Webhook Integration
-- **Opis:** GitHub webhooks - trigger aktualizacji
-- **Zysk:** Automatyczne wyzwalanie przy push'u
-- **Czas:** ~2h
-- **Status:** ⏳ Zaplanowany
-
-#### 4. SSH Key Support
-- **Opis:** Wsparcie dla SSH keys zamiast HTTPS
-- **Zysk:** Bezpieczeństwo i elastyczność
-- **Czas:** ~1.5h
-- **Status:** ⏳ Zaplanowany
-
-#### 5. Git Credentials Manager
-- **Opis:** Bezpieczne przechowywanie credentials
-- **Zysk:** Bezpieczeństwo haseł
-- **Czas:** ~1h
-- **Status:** ⏳ Zaplanowany
-
----
-
-### 🟢 v6.0 (Q2 2026+ - Planowany)
+### 🟡 v5.2 (Q2 2026 - Planowany)
 
 #### 1. Docker Support
 - **Opis:** Dockerize aplikację dla łatwego deployment'u
@@ -171,7 +149,7 @@ v5.0 (Nov 2025) ✅ PRODUCTION READY
   └─ Notification Service
         │
         ▼
-v5.1 (Q1 2026) ⏳
+v5.1 (Q1 2026) ✅ PRODUCTION READY
   │
   ├─ Web Dashboard (Flask)
   ├─ REST API
@@ -180,12 +158,19 @@ v5.1 (Q1 2026) ⏳
   └─ Git Credentials Manager
         │
         ▼
-v6.0 (Q2 2026+) ⏳
+v5.2 (Q2 2026) ⏳
   │
   ├─ Docker Support
   ├─ PyInstaller Build (.exe)
   ├─ Auto-Update Feature
-  ├─ Mobile App (React Native)
+  ├─ Mobile App API
+  └─ Advanced Security
+        │
+        ▼
+v6.0 (Q3 2026+) ⏳
+  │
+  ├─ Performance Analytics
+  ├─ Batch Operations
   ├─ Multi-Language Support
   └─ Theme Customization
 ```
