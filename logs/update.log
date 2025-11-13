@@ -232,3 +232,46 @@
 ✅ Aktualizacja zakończona!
 2025-11-12 12:32:22,303 - INFO -   ✓ Commit: 🔄 Aktualizacja zawartości stron z szkoła25-26
 2025-11-12 12:32:24,448 - INFO -   ✓ Push ukończony
+2025-11-13 17:11:27,117 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-13 17:18:39,187 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-13 17:22:04,055 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-13 17:28:41,948 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-13 17:28:44,444 - INFO - 🔄 Rozpoczynanie aktualizacji...
+2025-11-13 17:28:44,468 - INFO - 
+🔍 Walidowanie repozytoriów:
+2025-11-13 17:28:44,594 - INFO -   ✓ Zweryfikowane: szkola25-26
+2025-11-13 17:28:44,698 - INFO -   ✓ Zweryfikowane: strona dziadu-dev
+2025-11-13 17:28:44,733 - INFO - 
+📤 Aktualizowanie repozytoriów:
+2025-11-13 17:28:44,753 - INFO -   📤 Aktualizowanie: szkola25-26
+2025-11-13 17:28:46,509 - INFO -   ✓ Gotowe: szkola25-26
+2025-11-13 17:28:46,537 - INFO -   📤 Aktualizowanie: strona dziadu-dev
+2025-11-13 17:28:47,304 - INFO -   ✓ Gotowe: strona dziadu-dev
+2025-11-13 17:28:47,328 - INFO - 
+📝 Aktualizowanie plików HTML:
+2025-11-13 17:28:47,381 - INFO -   📝 Zmiana detected: desktopy
+2025-11-13 17:28:47,437 - INFO -   📥 Skanowano: desktopy (6 sekcji)
+2025-11-13 17:28:47,477 - INFO -   💾 Backup: desktopy_backup_20251113_172847.html
+2025-11-13 17:28:47,562 - INFO -   ✓ +0 -0 ~0 desktopy.html
+2025-11-13 17:28:47,641 - INFO -   📝 Zmiana detected: informatyka
+2025-11-13 17:28:47,669 - INFO -   📥 Skanowano: informatyka (0 sekcji)
+2025-11-13 17:28:47,712 - INFO -   ⚠️  Brak zadań znalezionych w informatyka
+2025-11-13 17:28:47,751 - INFO -   📝 Zmiana detected: TSiAI
+2025-11-13 17:28:47,793 - INFO -   📥 Skanowano: TSiAI (1 sekcji)
+2025-11-13 17:28:47,829 - INFO -   💾 Backup: TSiAI_backup_20251113_172847.html
+2025-11-13 17:28:47,898 - INFO -   ✓ +0 -0 ~0 TSiAI.html
+2025-11-13 17:28:47,942 - INFO -   📝 Zmiana detected: WiAI
+2025-11-13 17:28:47,980 - INFO -   📥 Skanowano: WiAI (2 sekcji)
+2025-11-13 17:28:48,016 - INFO -   💾 Backup: WiAI_backup_20251113_172847.html
+2025-11-13 17:28:48,082 - INFO -   ✓ +0 -0 ~0 WiAI.html
+2025-11-13 17:28:48,114 - INFO - 
+======================================================================
+2025-11-13 17:28:48,198 - INFO - ℹ️  STRONA JEST AKTUALNA - Nie znaleziono żadnych zmian!
+2025-11-13 17:28:48,224 - INFO - ======================================================================
+2025-11-13 23:57:01,019 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-13 23:57:35,686 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-13 23:59:22,308 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-14 00:00:51,488 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-14 00:03:43,126 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-14 00:22:22,128 - INFO - 📝 Logging do pliku: logs/update.log
+2025-11-14 00:22:31,704 - INFO - 📝 Logging do pliku: logs/update.log

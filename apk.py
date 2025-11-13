@@ -2,7 +2,7 @@
 Aktualizator Strony - dziadu.dev
 Główny punkt wejścia aplikacji
 
-Wersja: 5.1 (PRODUCTION READY)
+Wersja: 5.2 (PRODUCTION READY)
 Status: ✅ GOTOWA DO UŻYTKU
 
 Cechy v4.1:
@@ -17,7 +17,7 @@ Cechy v4.1:
 - 🔐 Environment Variables (.env support)
 - 📝 Logging Settings
 
-Cechy v5.0 (NOWE!):
+Cechy v5.0:
 - 📊 SQLite Historia Aktualizacji + Analytics
 - 📈 Dashboard ze Statystykami
 - 📄 Eksport Raportów (PDF/Excel)
@@ -28,10 +28,18 @@ Cechy v5.0 (NOWE!):
 - 💬 Slack Integration
 - 🎮 Discord Integration
 - 📧 Email Reports
-- 🐳 Docker Support
-- 🔄 Auto-Update Feature
+
+Cechy v5.1:
 - 🌐 Web Dashboard (Flask)
-- 🗣️  Multi-Language Support
+- 🛠️  REST API
+- 🔌 Webhook Manager
+- 🔑 Credentials Manager
+
+Cechy v5.2 (NOWE!):
+- 🐳 Docker Support
+- 📦 PyInstaller Build
+- 🔄 Auto-Update Feature
+- 📱 Mobile API
 """
 
 import sys
@@ -44,7 +52,7 @@ import customtkinter as ctk
 from gui_modern import ModernGUI
 
 def main():
-    """Uruchomienie aplikacji z nowoczesnym GUI v5.0"""
+    """Uruchomienie aplikacji z nowoczesnym GUI v5.2"""
     root = ctk.CTk()
     app = ModernGUI(root)
     root.mainloop()

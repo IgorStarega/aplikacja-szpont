@@ -1,403 +1,191 @@
-# 🔄 Aktualizator Strony - v5.1 PRODUCTION READY
+# 🚀 Aktualizator Strony v5.2
 
-**Nowoczesna aplikacja do automatycznego aktualizowania strony internetowej na bazie repozytorium GitHub.**
+Automatyczna aktualizacja strony **prakt.dziadu.dev** z repozytorium źródłowego.
 
-![Version](https://img.shields.io/badge/version-5.1-blue)
-![Python](https://img.shields.io/badge/python-3.7+-green)
-![Status](https://img.shields.io/badge/status-PRODUCTION%20READY-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-blue)
-
----
-
-## 🎯 Główne Cechy
-
-### ⚡ Performance (v4.1+)
-- **Batch Processing**: +3x szybciej (ThreadPoolExecutor, 4 wątki)
-- **Caching**: -60% czasu skanowania (MD5 hashing)
-- **Async Git**: GUI zawsze responsywne (0% freezing)
-- **Incremental Updates**: Powtórne aktualizacje 12-25x szybciej!
-- **Natural Sort**: Zadania sortowane numerycznie (Zadanie1, 2, 3, 10 zamiast 1, 10, 2, 3)
-
-### 📊 Analytics & Reporting (v5.0 NEW)
-- **SQLite Historia**: Baza danych wszystkich aktualizacji
-- **Analytics Dashboard**: Statystyki z ostatnich 30 dni
-- **Excel/PDF Reports**: Eksport z automatycznym formatowaniem
-- **Real-time Metrics**: Licznik kart, czasu, cache'a
-
-### 📅 Automatyzacja (v5.0 NEW)
-- **Update Scheduler**: Uruchamiaj aktualizacje o określonym czasie
-- **Harmonogram Codziennie**: Konfiguruj godzinę i minutę
-- **Harmonogram Interwałowo**: Co N godzin/minut/sekund
-
-### 💬 Powiadomienia (v5.0 NEW)
-- **Slack Integration**: Powiadomienia na Slack
-- **Discord Integration**: Embeds na Discord
-- **Email Reports**: Wysyłanie raportów email
-
-### 🌐 Web & API (v5.1 NEW)
-- **Flask Web Dashboard**: Zarządzanie z przeglądarki
-- **REST API**: Programistyczne sterowanie
-- **GitHub Webhooks**: Automatyczne wyzwalanie przy push'u
-- **WebSocket Updates**: Real-time aktualizacje
-
-### 🔐 Security (v5.1 NEW)
-- **SSH Key Management**: Bezpieczne klucze SSH
-- **Git Credentials**: Szyfrowane hasła i tokeny
-- **Encrypted Storage**: AES-256 encryption
-- **Credential Rotation**: Zmiana haseł
-
-### 🎨 GUI
-- **Nowoczesny Interfejs**: customtkinter (elegancki Tkinter)
-- **Dark/Light Mode**: Automatyczne lub ręczne przełączanie
-- **7 Zakładek**: Aktualizacja, Analytics, Raporty, Harmonogram, Powiadomienia, Ustawienia
-- **Progress Bar**: Z realtime ETA i wskaźnikami cache'a
+[![Status](https://img.shields.io/badge/status-production%20ready-brightgreen)]()
+[![Version](https://img.shields.io/badge/version-5.2-blue)]()
+[![Python](https://img.shields.io/badge/python-3.7%2B-blue)]()
 
 ---
 
-## 🚀 Szybki Start
+## ✨ Funkcje
 
-### 1. Instalacja Zależności
+- ⚡ **Batch Processing** - 3x szybsze przetwarzanie
+- 💾 **Smart Caching** - 60% oszczędności czasu
+- 🔄 **Auto-Update** - automatyczna aktualizacja aplikacji z GitHub
+- 📊 **Analytics** - statystyki i raporty (Excel/PDF)
+- 📅 **Scheduler** - harmonogram automatycznych aktualizacji
+- 💬 **Notifications** - Slack, Discord
+- 🌐 **Web Dashboard** - Flask + REST API
+- 🐳 **Docker** - gotowy do deployment
+
+---
+
+## 🚀 Quick Start
+
+### Opcja 1: Standalone (.exe) - **ZALECANE**
 
 ```bash
+# Uruchom gotową aplikację (bez instalacji Python!)
+uruchom.bat
+```
+
+lub
+
+```bash
+dist\AktualizatorStrony.exe
+```
+
+### Opcja 2: Development
+
+```bash
+# Zainstaluj zależności
 pip install -r requirements.txt
-```
 
-### 2. Konfiguracja
-
-#### Zmienne Środowiskowe (.env)
-```bash
-cp .env.example .env
-# Edytuj .env i ustaw:
-SOURCE_REPO_PATH=C:\Users\stare\szkola25-26
-TARGET_REPO_PATH=C:\Users\stare\strona-dziadu-dev
-```
-
-#### Ścieżki w GUI
-1. Otwórz aplikację
-2. Wpisz ścieżki repozytoriów lub kliknij "📂 Przeglądaj"
-3. Ścieżki są automatycznie zapisywane
-
-### 3. Uruchomienie
-
-```bash
+# Uruchom aplikację
 python apk.py
 ```
 
----
+### Opcja 3: Docker
 
-## 📋 Użytkownik
-
-### 🚀 Aktualizacja
-1. Kliknij "🚀 Aktualizuj Teraz (v5.0)"
-2. Obserwuj progres z ETA
-3. Otrzymasz komunikat o wyniku
-4. Logi pokazują szczegóły (karty dodane/zmienione/usunięte)
-
-### 📊 Analytics
-1. Przejdź do zakładki "📊 Analytics"
-2. Kliknij "🔄 Odśwież Statystyki"
-3. Wyświetlą się statystyki z ostatnich 30 dni:
-   - Liczba aktualizacji (udane, nieudane, bez zmian)
-   - Liczba kart (dodane, zmienione, usunięte)
-   - Średni czas trwania
-   - Użycie cache'a
-
-### 📄 Raporty
-1. Przejdź do zakładki "📄 Raporty"
-2. Kliknij "📊 Eksportuj do Excel" lub "📕 Eksportuj do PDF"
-3. Raporty będą zapisane w `src/.data/reports/`
-
-### 📅 Harmonogram
-1. Przejdź do zakładki "📅 Harmonogram"
-2. Ustaw godzinę i minutę
-3. Kliknij "➕ Dodaj"
-4. Kliknij "▶️  Uruchom Scheduler"
-5. Aktualizacje będą uruchamiane automatycznie
-
-### 💬 Powiadomienia
-1. Przejdź do zakładki "💬 Powiadomienia"
-2. Wpisz Slack token i ID kanału
-3. Kliknij "Konfiguruj Slack"
-4. Alternatywnie: wpisz Discord webhook URL
-5. Powiadomienia będą wysyłane na wybrany kanał
+```bash
+docker-compose up -d
+```
 
 ---
 
-## 📊 Dokumentacja Techniczna
+## 📖 Pierwsze użycie
 
-### Struktura Projektu
+1. **Uruchom aplikację** (patrz Quick Start)
+2. **Ustaw ścieżki** w GUI:
+   - **Źródło:** Ścieżka do `szkola25-26`
+   - **Cel:** Ścieżka do `strona-dziadu-dev`
+3. **Kliknij:** "🚀 Aktualizuj Teraz"
+4. **Gotowe!** Aplikacja automatycznie zaktualizuje stronę
+
+---
+
+## 🔧 Build
+
+Zbuduj standalone .exe:
+
+```bash
+build.bat
+```
+
+Wynik: `dist\AktualizatorStrony.exe` (~39 MB)
+
+
+---
+
+## 🔄 Auto-Update
+
+Aplikacja automatycznie sprawdza aktualizacje przy starcie:
+- Łączy się z GitHub Releases
+- Pobiera i instaluje nowe wersje automatycznie
+- Zachowuje konfigurację użytkownika
+
+Wyłączenie: `config.json` → `"check_updates_on_startup": false`
+
+---
+
+## 📊 Struktura
 
 ```
 aplikacja-szpont/
-├── 📄 apk.py                       ← Główny punkt wejścia
-├── 📄 requirements.txt              ← Zależności
-├── 📄 README.md                     ← Ten plik
-├── 📄 CHANGELOG.md                  ← Historia zmian
-│
-├── 📁 src/                          ← Główny kod
-│   ├── config.json                  ← Konfiguracja aplikacji
-│   ├── config_manager.py            ← Manager konfiguracji
-│   ├── gui_modern.py                ← GUI (customtkinter) v5.0
-│   ├── theme_manager.py             ← Manager motywów
-│   ├── update_manager.py            ← Manager aktualizacji
-│   ├── database_manager.py          ← SQLite Manager (NEW v5.0)
-│   ├── report_generator.py          ← Report Generator (NEW v5.0)
-│   ├── scheduler.py                 ← Update Scheduler (NEW v5.0)
-│   ├── notification_service.py      ← Notifications (NEW v5.0)
-│   │
-│   ├── .cache/                      ← Cache struktury folderów
-│   │   └── structure_cache.json
-│   │
-│   ├── .data/                       ← Baza danych i raporty (NEW v5.0)
-│   │   └── reports/                 ← Raporty Excel/PDF
-│   │   └── updates.db               ← SQLite baza
-│   │
-│   └── .config/                     ← Konfiguracje (NEW v5.0)
-│       ├── schedule.json            ← Harmonogram
-│       └── notifications.json       ← Powiadomienia
-│
-├── 📁 docs/                         ← Dokumentacja
-│   ├── API_REFERENCE.md
-│   ├── INSTRUKCJA.md
-│   └── TROUBLESHOOTING.md
-│
-├── 📁 tests/                        ← Testy
-│   ├── test_update_manager.py
-│   └── check_app.py
-│
-├── 📁 backups/                      ← Automatyczne backupy HTML
-│
-├── 📁 logs/                         ← Logi aplikacji
-│   └── update.log
-│
-└── 📁 strony/                       ← Strony do testowania
-    └── src/
+├── apk.py                    # Główny punkt wejścia
+├── config.json               # Konfiguracja
+├── requirements.txt          # Zależności
+├── uruchom.bat              # Szybki start
+├── build.bat                # Build .exe
+├── src/                     # Kod źródłowy
+│   ├── gui_modern.py        # GUI (customtkinter)
+│   ├── update_manager.py    # Logika aktualizacji
+│   ├── database_manager.py  # SQLite
+│   └── ...
+└── dist/                    # Zbudowana aplikacja
+    └── AktualizatorStrony.exe
 ```
-
-### Architektura
-
-```
-┌─────────────────────────────────────┐
-│           GUI (customtkinter)       │  v5.0
-├─────────────────────────────────────┤
-│  UpdateManager  │  DatabaseManager  │  v5.0 Components
-│  ReportGenerator│  Scheduler        │
-│  Notifications  │  ConfigManager    │
-├─────────────────────────────────────┤
-│        Git Operations (subprocess)  │  Backend
-│     HTML Processing (BeautifulSoup) │
-│     File I/O (pathlib, shutil)     │
-├─────────────────────────────────────┤
-│       SQLAlchemy ORM (SQLite)       │  Database v5.0
-│    External APIs (Slack, Discord)   │
-└─────────────────────────────────────┘
-```
-
-### Klasy Główne
-
-#### `ModernGUI` (gui_modern.py)
-- GUI aplikacji z 7 zakładkami
-- Threading dla asynchronicznych operacji
-- Progress bar z ETA
-- Integracja z UpdateManager
-
-#### `UpdateManager` (update_manager.py)
-- Batch processing (ThreadPoolExecutor)
-- Caching (MD5 hashing)
-- Git operacje (async)
-- Inteligentne różnicowanie (diff)
-- Incremental updates
-
-#### `DatabaseManager` (database_manager.py) - NEW v5.0
-- SQLite ORM (SQLAlchemy)
-- Tabela UpdateHistory
-- Metody: add_update_record, get_statistics, cleanup_old_records
-
-#### `ReportGenerator` (report_generator.py) - NEW v5.0
-- Eksport do Excel (openpyxl)
-- Eksport do PDF (reportlab)
-- Formatowanie i styling
-
-#### `UpdateScheduler` (scheduler.py) - NEW v5.0
-- Codzienne aktualizacje (schedule)
-- Aktualizacje interwałowe
-- Threading dla pętli schedulera
-
-#### `NotificationService` (notification_service.py) - NEW v5.0
-- Slack SDK
-- Discord webhook
-- Email (smtplib)
 
 ---
 
-## 🔧 Konfiguracja
+## ⚙️ Wymagania
 
-### config.json
+- **Windows:** 7 SP1+ / 8 / 10 / 11
+- **Python:** 3.7+ (tylko dla development)
+- **Git:** Zainstalowany w systemie
+- **Internet:** Do auto-update i Git push
+
+**Dla .exe:** Python NIE jest wymagany!
+
+---
+
+## 📋 Kluczowe funkcje
+
+### Analytics & Reports
+- SQLite baza danych historii aktualizacji
+- Dashboard ze statystykami
+- Eksport do Excel/PDF
+
+### Automatyzacja
+- Harmonogram codziennych aktualizacji
+- Powiadomienia (Slack/Discord/Email)
+- GitHub Webhooks
+
+### Web & API
+- Flask Web Dashboard (port 5000)
+- REST API endpoints
+- Mobile API support
+
+### Production
+- Docker & docker-compose
+- PyInstaller standalone build
+- Auto-update z GitHub Releases
+
+---
+
+## 🛠️ Konfiguracja
+
+Edytuj `config.json`:
+
 ```json
 {
-  "SOURCE_REPO_PATH": "C:\\Users\\stare\\szkola25-26",
-  "TARGET_REPO_PATH": "C:\\Users\\stare\\strona-dziadu-dev",
-  "auto_update_enabled": false,
-  "log_level": "INFO",
-  "backup_enabled": true,
-  "theme": "dark"
-}
-```
-
-### .env
-```env
-SOURCE_REPO_PATH=C:\Users\stare\szkola25-26
-TARGET_REPO_PATH=C:\Users\stare\strona-dziadu-dev
-LOG_LEVEL=INFO
-BACKUP_ENABLED=true
-BACKUP_CLEANUP_DAYS=30
-```
-
-### schedule.json (Harmonogram) - NEW v5.0
-```json
-{
-  "enabled": true,
-  "jobs": [
-    {
-      "name": "daily_update",
-      "type": "daily",
-      "time": "02:00"
-    }
-  ]
-}
-```
-
-### notifications.json (Powiadomienia) - NEW v5.0
-```json
-{
-  "slack": {
-    "enabled": true,
-    "token": "xoxb-...",
-    "channel": "C123..."
-  },
-  "discord": {
-    "enabled": true,
-    "webhook_url": "https://discord.com/..."
-  }
+  "app_version": "5.2",
+  "source_path": "C:\\Users\\nazwa\\szkola25-26",
+  "target_path": "C:\\Users\\nazwa\\strona-dziadu-dev",
+  "theme": "system",
+  "check_updates_on_startup": true
 }
 ```
 
 ---
 
-## 📈 Performance
+## 💡 Docker deployment
 
-### Benchmark v4.1
-
-| Operacja | Czas | Poprawa |
-|----------|------|--------|
-| **Full Update (bez cache)** | 1-3s | - |
-| **Full Update (z cache)** | 400-500ms | 3-7x szybciej |
-| **Batch Processing** | +3x szybciej | 300% |
-| **Async Git** | 0% freezing GUI | 100% |
-| **Memory Usage** | ~50MB | Stabilny |
-
-### Statystyki Cache
-
-- **Struktura Cache**: `src/.cache/structure_cache.json`
-- **MD5 Hashing**: Każdy folder ma unikatowy hash
-- **Detekcja Zmian**: Automatyczna przy starcie
-- **Oszczędności**: -60% czasu skanowania
-
----
-
-## 🧪 Testowanie
-
-### Unit Testy
 ```bash
-pytest tests/ -v
-pytest tests/ --cov=src
+docker-compose up -d
 ```
 
-### Szybkie Sprawdzenie
-```bash
-python tests/check_app.py
-```
-
----
-
-## 🐛 Troubleshooting
-
-### Problem: "ModuleNotFoundError: No module named 'customtkinter'"
-**Rozwiązanie**: 
-```bash
-pip install -r requirements.txt
-```
-
-### Problem: "Aktualizacja zawiesza się"
-**Rozwiązanie**: 
-- Sprawdzić czy ścieżki są poprawne
-- Sprawdzić logi w `logs/update.log`
-- Upewnić się że Git jest zainstalowany
-
-### Problem: "Cache nie działa"
-**Rozwiązanie**: 
-- Sprawdzić czy folder `src/.cache/` istnieje
-- Usunąć `src/.cache/structure_cache.json` i uruchomić ponownie
-
----
-
-## 📞 Wsparcie
-
-1. Sprawdź `docs/TROUBLESHOOTING.md`
-2. Przeczytaj `docs/INSTRUKCJA.md`
-3. Sprawdź `logs/update.log`
+Web Dashboard: `http://localhost:5000`
 
 ---
 
 ## 📄 Licencja
 
-MIT License - Wolne do użytku i modyfikacji.
+Zobacz `LICENSE.txt`
 
 ---
 
-## 🎉 Changelog
+## 🎯 Status
 
-### v5.0 (2025-11-07) ✅ PRODUCTION READY
-- ✅ SQLite Historia Aktualizacji
-- ✅ Analytics Dashboard
-- ✅ Report Generator (Excel/PDF)
-- ✅ Update Scheduler
-- ✅ Notifications (Slack/Discord/Email)
-
-### v4.1 (2025-11-06) ✅ PRODUCTION READY
-- ✅ Batch Processing (+3x szybciej)
-- ✅ Caching (-60% czasu)
-- ✅ Async Git Operations
-- ✅ Inteligentne Różnicowanie
-- ✅ Incremental Updates
-
-### v4.0 (2025-11-05)
-- ✅ Nowoczesne GUI (customtkinter)
-- ✅ Dark/Light Mode
-- ✅ Theme Manager
-- ✅ Logging Settings
-
-Pełna historia w `CHANGELOG.md`
+**Wersja:** 5.2  
+**Status:** ✅ Production Ready  
+**Data:** 2025-11-14  
+**Strona:** https://prakt.dziadu.dev
 
 ---
 
-## 🚀 Przyszłe Usprawnienia
+**Gotowa do użycia!** 🚀
 
-### v5.1 (Q1 2026)
-- Web Dashboard (Flask)
-- REST API
-- Webhook Integration (GitHub)
-- SSH Key Support
-
-### v6.0 (Q2 2026)
-- Docker Support
-- PyInstaller Build (.exe)
-- Multi-Language Support
-- Theme Customization
-
----
-
-**Aplikacja v5.0 jest w pełni funkcjonalna i gotowa do produkcji!** 🚀
-
-Obsługuje: **Windows, macOS, Linux** | **Python 3.7+**
+Więcej informacji: `TODO.md`
 

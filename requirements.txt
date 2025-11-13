@@ -1,10 +1,10 @@
 # Aktualizator Strony - prakt.dziadu.dev
-# Wymagania - v5.0
+# Wymagania - v5.2
 
 # Główna aplikacja
 # Python 3.7+ - wbudowany Tkinter
 
-# Zależności (v4.1-v5.0)
+# Zależności (v4.1-v5.2)
 beautifulsoup4>=4.9.0      # Parsowanie HTML
 python-dotenv>=0.19.0      # Environment variables (.env support)
 customtkinter>=5.0.0       # Modern Dark/Light Mode GUI
@@ -35,7 +35,10 @@ alembic>=1.11.0            # Database migrations
 cryptography>=40.0.0       # SSH Keys encryption
 paramiko>=3.0.0            # SSH support
 GitPython>=3.1.0           # Python Git wrapper
-pyinstaller>=5.0.0         # Executable build
+
+# v5.2 Features - Build & Deployment
+pyinstaller>=5.13.0        # Executable build (.exe)
+docker>=6.0.0              # Docker API (opcjonalnie)
 
 # Narzędzia dla developers
 pytest>=6.0.0              # Unit testy

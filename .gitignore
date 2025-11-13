@@ -2,3 +2,9 @@
 .venv/
 tests/
 .idea/
+backups/
+release/
+TODO.md
+build/
+dist/
+src/.data

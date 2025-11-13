@@ -35,8 +35,9 @@ class ConfigManager:
 
     def _get_default_config(self) -> Dict[str, Any]:
         """Domyślna konfiguracja (z priorytetem na .env)"""
+        # Wpisane domyślnie lokalne ścieżki repozytoriów
         return {
-            # Pobierz z .env jeśli istnieje, inaczej użyj domyślnych
+            # Pobierz z .env jeśli istnieje, inaczej użyj lokalnych ścieżek
             "source_path": os.getenv("SOURCE_REPO_PATH", r"C:\Users\stare\szkola25-26"),
             "target_path": os.getenv("TARGET_REPO_PATH", r"C:\Users\stare\strona dziadu-dev"),
             "auto_update_enabled": os.getenv("AUTO_UPDATE_ENABLED", "false").lower() == "true",

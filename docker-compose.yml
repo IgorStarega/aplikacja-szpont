@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  aktualizator:
+    build: .
+    container_name: aktualizator-strony
+    volumes:
+      - ./config.json:/app/config.json
+      - ./logs:/app/logs
+      - ./backups:/app/backups
+      - ./src/.data:/app/src/.data
+      - ./src/.cache:/app/src/.cache
+      - ./src/.config:/app/src/.config
+      # Montuj repozytoria jako woluminy
+      - ${SOURCE_REPO_PATH}:/repos/source:ro
+      - ${TARGET_REPO_PATH}:/repos/target
+    ports:
+      - "5000:5000"  # Web Dashboard
+      - "8080:8080"  # API
+    environment:
+      - SOURCE_REPO_PATH=/repos/source
+      - TARGET_REPO_PATH=/repos/target
+      - LOG_LEVEL=INFO
+      - BACKUP_ENABLED=true
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    networks:
+      - aktualizator-network
+
+networks:
+  aktualizator-network:
+    driver: bridge
+

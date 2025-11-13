@@ -1,22 +1,12 @@
 {
-  "source_path": "C:\\Users\\stare\\szkola25-26",
-  "target_path": "C:\\Users\\stare\\strona dziadu-dev",
+  "app_version": "5.2",
+  "source_path": "",
+  "target_path": "",
+  "theme": "system",
   "auto_update_enabled": false,
   "auto_update_interval": 60,
   "auto_update_interval_unit": "minutes",
-  "last_update": "2025-11-06T15:51:18.335698",
-  "update_history": [
-    {
-      "timestamp": "2025-11-06T15:51:18.335658",
-      "added_count": 59,
-      "modified_count": 0,
-      "removed_count": 0,
-      "folders": [
-        "WiAI",
-        "informatyka",
-        "desktopy",
-        "TSiAI"
-      ]
-    }
-  ]
+  "check_updates_on_startup": true,
+  "last_update": null,
+  "update_history": []
 }

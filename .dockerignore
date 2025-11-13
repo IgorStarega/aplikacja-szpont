@@ -1,0 +1,69 @@
+# Docker Ignore dla Aktualizator Strony v5.2
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs i cache
+logs/
+*.log
+src/.cache/
+src/.data/
+src/.config/
+backups/
+
+# Config (zachowaj template)
+config.json
+.env
+
+# Release builds
+release/
+dist/
+build/
+
+# Git
+.git/
+.gitignore
+
+# Dokumentacja (oprócz TODO.md)
+*.md
+!TODO.md
+
+# Temporary
+*.tmp
+*.bak
+*.old
+
+# OS
+.DS_Store
+Thumbs.db
+

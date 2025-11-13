@@ -1,294 +1,95 @@
-# 📋 TODO i Mapa Drogowa - v5.1 PRODUCTION READY
+﻿# 📋 TODO - Aktualizator Strony v5.2
 
-## ✅ STATUS: v5.1 GOTOWA DO PRODUKCJI!
+## ✅ STATUS: PRODUCTION READY
 
-**Aplikacja v5.1 + Natural Sort (v4.1+) jest w pełni testowana i gotowa do użytku.**
-
----
-
-## 🎯 CO ZROBIONO (v4.1 - v5.1)
-
-### ✅ v4.1 Features (GOTOWE)
-- ✅ Batch Processing (+3x szybciej)
-- ✅ Caching Struktury Folderów (-60% czasu)
-- ✅ Asynchroniczne Git Operacje (GUI responsywne)
-- ✅ Inteligentne Różnicowanie (porównywanie HTML)
-- ✅ Incremental Updates (tylko zmieniane foldery)
-- ✅ Natural Sort (Zadanie1, Zadanie2, Zadanie10 zamiast 1, 10, 2)
-
-### ✅ v5.0 Features (GOTOWE)
-- ✅ SQLite Historia Aktualizacji (database_manager.py)
-- ✅ Analytics Dashboard (zakładka Analytics)
-- ✅ Excel/PDF Report Generator (report_generator.py)
-- ✅ Update Scheduler (scheduler.py)
-- ✅ Slack Notifications (notification_service.py)
-- ✅ Discord Notifications (notification_service.py)
-- ✅ Email Reports (notification_service.py)
-- ✅ Database Cleanup (auto-remove >90 dni)
-
-### ✅ v5.1 Features (GOTOWE)
-- ✅ Web Dashboard (Flask) (web_dashboard.py)
-- ✅ REST API Endpoints (api_manager.py)
-- ✅ GitHub Webhook Integration (webhook_manager.py)
-- ✅ SSH Key Management (ssh_manager.py)
-- ✅ Git Credentials Manager (credentials_manager.py)
-
-### ✅ GUI Updates (v5.0)
-- ✅ 7 Zakładek (Aktualizacja, Analytics, Raporty, Harmonogram, Powiadomienia, Ustawienia)
-- ✅ SQLite Historia z real-time statystykami
-- ✅ Export raportów (Excel + PDF)
-- ✅ Konfiguracja powiadomień bez restartu
-- ✅ Scheduler z persystentną konfiguracją
+Aplikacja v5.2 jest w pełni funkcjonalna i gotowa do użytku.
 
 ---
 
-## 📊 Statystyka v5.1
+## 🎯 Funkcje v5.2
+
+### ⚡ Core (v4.1)
+- ✅ Batch Processing (+300% szybciej)
+- ✅ Caching struktury folderów (-60% czasu)
+- ✅ Asynchroniczne operacje Git
+- ✅ Inteligentne różnicowanie HTML
+- ✅ Incremental Updates
+
+### 📊 Analytics (v5.0)
+- ✅ SQLite baza danych
+- ✅ Dashboard ze statystykami
+- ✅ Raporty Excel/PDF
+- ✅ Harmonogram aktualizacji
+- ✅ Powiadomienia (Slack/Discord)
+
+### 🌐 Web & API (v5.1)
+- ✅ Web Dashboard (Flask)
+- ✅ REST API
+- ✅ Webhook Integration
+- ✅ SSH Key Management
+
+### 🚀 Production (v5.2)
+- ✅ Docker Support
+- ✅ PyInstaller Build (.exe)
+- ✅ Auto-Update (GitHub)
+- ✅ Mobile API
+- ✅ Advanced Security
+
+---
+
+## 📊 Statystyki
 
 | Aspekt | Wartość |
 |--------|---------|
-| **Wersja** | 5.1 |
+| **Wersja** | 5.2 |
 | **Status** | ✅ PRODUCTION READY |
-| **Linie Kodu** | ~5500+ |
-| **Moduły** | 13 (dodano 5 dla v5.1) |
-| **GUI Zakładek** | 7 |
-| **Features** | 23+ |
-| **Performance** | +5x szybciej z Analytics |
-| **Database** | ✅ SQLite |
-| **Notifications** | ✅ 3x (Slack, Discord, Email) |
-| **Web/API** | ✅ Flask + REST API |
+| **Moduły** | 15 |
+| **Funkcje** | 28+ |
+| **Linie kodu** | ~7000+ |
 
 ---
 
-## 🗂️ Nowe Pliki (v5.1)
+## 🚀 Quick Start
 
-### Moduły v5.1
-- ✅ `src/web_dashboard.py` - Flask Web Dashboard
-- ✅ `src/api_manager.py` - REST API Endpoints
-- ✅ `src/webhook_manager.py` - GitHub Webhook Integration
-- ✅ `src/ssh_manager.py` - SSH Key Management
-- ✅ `src/credentials_manager.py` - Git Credentials Manager
-
-### Dokumentacja
-- ✅ `CHANGELOG.md` - Historia zmian wszystkich wersji
-- ✅ `README.md` - Zaktualizowany do v5.0
-
-### Foldery
-- ✅ `src/.data/` - Baza danych i raporty
-- ✅ `src/.config/` - Konfiguracje (schedule.json, notifications.json)
-
----
-
-## 🚀 Przyszłe Usprawnienia
-
-### 🟡 v5.2 (Q2 2026 - Planowany)
-
-#### 1. Docker Support
-- **Opis:** Dockerize aplikację dla łatwego deployment'u
-- **Zysk:** Deployment bez Python'a
-- **Czas:** ~2h
-- **Status:** ⏳ Zaplanowany
-
-#### 2. PyInstaller Build
-- **Opis:** Standalone .exe bez Python'a
-- **Zysk:** Jedna plik do uruchomienia
-- **Czas:** ~1.5h
-- **Status:** ⏳ Zaplanowany
-
-#### 3. Auto-Update Feature
-- **Opis:** Aplikacja automatycznie się aktualizuje
-- **Zysk:** Zawsze najnowsza wersja
-- **Czas:** ~2h
-- **Status:** ⏳ Zaplanowany
-
-#### 4. Mobile App (React Native)
-- **Opis:** Aplikacja mobilna do sterowania
-- **Zysk:** Aktualizacje z telefonu
-- **Czas:** ~15h
-- **Status:** ⏳ Zaplanowany
-
-#### 5. Multi-Language Support
-- **Opis:** Wsparcie dla PL, EN, DE, FR
-- **Zysk:** Międzynarodowe użytkowniki
-- **Czas:** ~3h
-- **Status:** ⏳ Zaplanowany
-
-#### 6. Theme Customization
-- **Opis:** Twórz własne motywy kolorów
-- **Zysk:** Personalizacja UI
-- **Czas:** ~2h
-- **Status:** ⏳ Zaplanowany
-
----
-
-## 📈 Mapa Drogowa
-
-```
-v4.0 (Nov 2025)
-  │
-  ├─ GUI + Dark Mode
-  ├─ Theme Manager
-  └─ Logging Settings
-        │
-        ▼
-v4.1 (Nov 2025) ✅ PRODUCTION READY
-  │
-  ├─ Batch Processing
-  ├─ Caching (-60%)
-  ├─ Async Git
-  ├─ Inteligentne Diff
-  └─ Incremental Updates
-        │
-        ▼
-v5.0 (Nov 2025) ✅ PRODUCTION READY
-  │
-  ├─ SQLite Historia
-  ├─ Analytics Dashboard
-  ├─ Report Generator
-  ├─ Update Scheduler
-  ├─ Slack/Discord/Email
-  └─ Notification Service
-        │
-        ▼
-v5.1 (Q1 2026) ✅ PRODUCTION READY
-  │
-  ├─ Web Dashboard (Flask)
-  ├─ REST API
-  ├─ Webhook Integration
-  ├─ SSH Key Support
-  └─ Git Credentials Manager
-        │
-        ▼
-v5.2 (Q2 2026) ⏳
-  │
-  ├─ Docker Support
-  ├─ PyInstaller Build (.exe)
-  ├─ Auto-Update Feature
-  ├─ Mobile App API
-  └─ Advanced Security
-        │
-        ▼
-v6.0 (Q3 2026+) ⏳
-  │
-  ├─ Performance Analytics
-  ├─ Batch Operations
-  ├─ Multi-Language Support
-  └─ Theme Customization
-```
-
----
-
-## ✅ Checklist v5.0 (KOMPLETNE)
-
-### Backend
-- ✅ DatabaseManager (SQLAlchemy ORM)
-- ✅ ReportGenerator (Excel + PDF)
-- ✅ UpdateScheduler (schedule library)
-- ✅ NotificationService (Slack + Discord + Email)
-
-### Frontend
-- ✅ 7 Zakładek w GUI
-- ✅ Analytics zakładka
-- ✅ Reports zakładka
-- ✅ Scheduler zakładka
-- ✅ Notifications zakładka
-
-### Zależności
-- ✅ openpyxl (Excel)
-- ✅ reportlab (PDF)
-- ✅ schedule (Scheduler)
-- ✅ requests (HTTP)
-- ✅ slack-sdk (Slack)
-- ✅ discord.py (Discord)
-- ✅ sqlalchemy (ORM)
-- ✅ flask (Web Dashboard - Future)
-
-### Dokumentacja
-- ✅ CHANGELOG.md (pełna historia)
-- ✅ README.md (zaktualizowany)
-- ✅ Inline docstrings (wszystkie metody)
-
-### Testowanie
-- ✅ Import check (wszystkie moduły)
-- ✅ Syntax check (bez błędów)
-- ✅ Runtime test (GUI uruchamia się)
-
----
-
-## 🎉 Wersja 5.0 Podsumowanie
-
-### Wydajność
-| Metryka | v4.1 | v5.0 |
-|---------|------|------|
-| **Full Update** | 1-3s | 1-3s (+ DB save) |
-| **Cache** | -60% | -60% + Analytics |
-| **Async Git** | 0% freeze | 0% freeze |
-| **Features** | 10 | 18+ |
-| **GUI Zakładek** | 2 | 7 |
-
-### Nowe Możliwości
-- 📊 Pełna historia aktualizacji w bazie
-- 📈 Statystyki z trendy
-- 📄 Raporty Excel/PDF
-- 📅 Automatyczne aktualizacje
-- 💬 Powiadomienia na Slack/Discord/Email
-
-### Kod Źródłowy
-- Linie Kodu: ~4500+
-- Dokumentacja: Kompletna
-- Type Hints: Wszędzie
-- Error Handling: Pełne
-
----
-
-## 📝 Notatki
-
-- ✅ Aplikacja jest stabilna i gotowa do użytku
-- ✅ Wszystkie testy przechodzą
-- ✅ Kod jest dobrze udokumentowany
-- ✅ Performance jest zadowalający
-- ✅ GUI jest intuicyjny i nowoczesny
-- ✅ Baza danych jest persystentna
-- ✅ Notyfikacje są konfigurowalne
-- ✅ Scheduler jest niezawodny
-- ✅ Raporty są czytelne i ładne
-- ✅ **APLIKACJA v5.0 JEST PRODUCTION READY!**
-
----
-
-## 🚀 Instrukcja Uruchomienia
-
-### Instalacja
-```bash
-pip install -r requirements.txt
-```
-
-### Uruchomienie
+### Standard
 ```bash
 python apk.py
 ```
 
-### Pierwsza Aktualizacja
-1. Wpisz ścieżki repozytoriów
-2. Kliknij "🚀 Aktualizuj Teraz"
-3. Obserwuj progres
-4. Sprawdź logi
+### Standalone (.exe)
+```bash
+uruchom.bat
+# lub
+dist\AktualizatorStrony.exe
+```
 
-### Użycie v5.0 Features
-1. **Analytics**: Przejdź do "📊 Analytics" i kliknij "🔄 Odśwież"
-2. **Raporty**: Przejdź do "📄 Raporty" i kliknij "📊 Eksportuj do Excel"
-3. **Harmonogram**: Przejdź do "📅 Harmonogram", ustaw czas, kliknij "▶️  Uruchom"
-4. **Powiadomienia**: Przejdź do "💬 Powiadomienia", wpisz Slack/Discord, kliknij "Konfiguruj"
+### Docker
+```bash
+docker-compose up -d
+```
 
----
-
-## 📞 Wsparcie
-
-- Dokumentacja: Czytaj `README.md`
-- Logi: Sprawdź `logs/update.log`
-- Błędy: Czytaj `docs/TROUBLESHOOTING.md`
-- Instrukcja: Czytaj `docs/INSTRUKCJA.md`
+### Build
+```bash
+build.bat              # Build .exe
+build_full.bat         # Build .exe + instalator
+```
 
 ---
 
-**Aplikacja v5.0 jest kompletna i gotowa do produkcji!** 🎉🚀
+## 📝 Pliki kluczowe
+
+```
+apk.py                    # Główny punkt wejścia
+config.json               # Konfiguracja
+requirements.txt          # Zależności Python
+build.bat                 # Build .exe
+uruchom.bat              # Szybki start
+utworz_skrot_pulpit.bat  # Skrót na pulpicie
+```
+
+---
+
+**Wersja:** 5.2  
+**Status:** ✅ PRODUCTION READY  
+**Data:** 2025-11-14
 
