@@ -40,6 +40,7 @@ Cechy v5.2 (NOWE!):
 - 📦 PyInstaller Build
 - 🔄 Auto-Update Feature
 - 📱 Mobile API
+- 🎨 Ikona Aplikacji (pasek zadań + skrót)
 """
 
 import sys
@@ -54,6 +55,29 @@ from gui_modern import ModernGUI
 def main():
     """Uruchomienie aplikacji z nowoczesnym GUI v5.2"""
     root = ctk.CTk()
+
+    # Ustaw ikonę aplikacji (pasek zadań i skrót)
+    try:
+        # Obsługa PyInstaller - znajdź ścieżkę do ikony
+        if getattr(sys, 'frozen', False):
+            # Aplikacja skompilowana przez PyInstaller
+            application_path = Path(sys._MEIPASS)
+            icon_path = application_path / "img" / "ikona.png"
+        else:
+            # Tryb deweloperski
+            icon_path = Path(__file__).parent / "img" / "ikona.png"
+
+        if icon_path.exists():
+            # Dla Windows - użyj PIL/Pillow do załadowania PNG
+            from PIL import Image, ImageTk
+            img = Image.open(str(icon_path))
+            photo = ImageTk.PhotoImage(img)
+            root.iconphoto(True, photo)
+            # Zapisz referencję, aby uniknąć garbage collection
+            root._icon_photo = photo
+    except Exception as e:
+        print(f"⚠️  Nie można załadować ikony: {e}")
+
     app = ModernGUI(root)
     root.mainloop()
 

@@ -23,6 +23,8 @@ a = Analysis(
         ('config.json', '.'),
         ('requirements.txt', '.'),
         ('TODO.md', '.'),
+        ('img/ikona.png', 'img'),  # Dodaj ikonę PNG
+        ('img/ikona.ico', 'img'),  # Dodaj ikonę ICO
     ],
     hiddenimports=[
         # GUI
@@ -101,6 +103,6 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='icon.ico' if os.path.exists('icon.ico') else None,
+    icon='img/ikona.ico' if os.path.exists('img/ikona.ico') else None,
 )
 

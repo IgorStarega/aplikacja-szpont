@@ -18,6 +18,7 @@ Automatyczna aktualizacja strony **prakt.dziadu.dev** z repozytorium źródłowe
 - 💬 **Notifications** - Slack, Discord
 - 🌐 **Web Dashboard** - Flask + REST API
 - 🐳 **Docker** - gotowy do deployment
+- 🎨 **Ikona Aplikacji** - profesjonalna ikona na pasku zadań i skrócie
 
 ---
 

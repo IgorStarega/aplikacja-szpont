@@ -1,4 +1,4 @@
-﻿# 📋 TODO - Aktualizator Strony v5.2
+﻿﻿# 📋 TODO - Aktualizator Strony v5.2
 
 ## ✅ STATUS: PRODUCTION READY
 
@@ -29,6 +29,11 @@ Aplikacja v5.2 jest w pełni funkcjonalna i gotowa do użytku.
 - ✅ SSH Key Management
 
 ### 🚀 Production (v5.2)
+- ✅ PyInstaller Build
+- ✅ Docker Support
+- ✅ Auto-Update Feature
+- ✅ Mobile API
+- ✅ Ikona Aplikacji (pasek zadań + skrót)
 - ✅ Docker Support
 - ✅ PyInstaller Build (.exe)
 - ✅ Auto-Update (GitHub)

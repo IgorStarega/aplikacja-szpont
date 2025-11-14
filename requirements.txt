@@ -9,6 +9,7 @@ beautifulsoup4>=4.9.0      # Parsowanie HTML
 python-dotenv>=0.19.0      # Environment variables (.env support)
 customtkinter>=5.0.0       # Modern Dark/Light Mode GUI
 darkdetect>=0.8.0          # Automatyczne wykrywanie dark mode
+Pillow>=9.0.0              # Obsługa obrazów (ikona aplikacji)
 
 # v4.2 Features - Analytics & Reports
 openpyxl>=3.0.0            # Eksport do Excel

@@ -35,6 +35,7 @@ import threading
 from pathlib import Path
 from datetime import datetime
 import os
+import sys
 import time
 from typing import Optional, Callable, Dict
 
@@ -122,6 +123,9 @@ class ModernGUI:
         self.root.geometry("1400x900")
         self.root.minsize(900, 700)
 
+        # Ustaw ikonę aplikacji (jeśli nie została już ustawiona)
+        self._set_app_icon()
+
         # Inicjalizuj zmienne NAJPIERW
         self.is_updating = False
         self.progress_value = 0
@@ -200,6 +204,48 @@ class ModernGUI:
         # Teraz można tworzyć UpdateManager
         self.update_manager = UpdateManager(self.log_message)
 
+    def _set_app_icon(self):
+        """Ustawia ikonę aplikacji na pasku zadań i skrócie"""
+        try:
+            # Znajdź ścieżkę do ikony - obsługa PyInstaller
+            if getattr(sys, 'frozen', False):
+                # Aplikacja skompilowana przez PyInstaller
+                application_path = Path(sys._MEIPASS)
+                icon_path = application_path / "img" / "ikona.png"
+            else:
+                # Tryb deweloperski
+                icon_path = Path(__file__).parent.parent / "img" / "ikona.png"
+
+            if not icon_path.exists():
+                print(f"⚠️  Ikona nie została znaleziona: {icon_path}")
+                return
+
+            # Dla Windows - użyj PIL/Pillow do załadowania PNG
+            try:
+                from PIL import Image, ImageTk
+                import tkinter as tk
+
+                # Załaduj obraz PNG
+                img = Image.open(str(icon_path))
+
+                # Przekonwertuj na PhotoImage dla tkinter
+                photo = ImageTk.PhotoImage(img)
+
+                # Ustaw ikonę (działa dla okna głównego i paska zadań)
+                self.root.iconphoto(True, photo)
+
+                # Zapisz referencję, aby uniknąć garbage collection
+                self.root._icon_photo = photo
+
+                print(f"✅ Ikona ustawiona pomyślnie: {icon_path.name}")
+
+            except ImportError:
+                print("⚠️  Pillow nie jest zainstalowany. Uruchom: pip install Pillow")
+            except Exception as e:
+                print(f"⚠️  Błąd ustawiania ikony: {e}")
+
+        except Exception as e:
+            print(f"⚠️  Błąd ogólny podczas ustawiania ikony: {e}")
 
     def build_ui(self):
         """Budowanie nowoczesnego interfejsu z zakładkami"""
