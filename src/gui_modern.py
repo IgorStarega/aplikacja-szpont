@@ -806,7 +806,7 @@ class ModernGUI:
 
         self.update_btn = ctk.CTkButton(
             button_frame,
-            text="🚀 Aktualizuj Teraz (v5.0)",
+            text="🚀 Aktualizuj Teraz (v5.2)",
             font=("Helvetica", 14, "bold"),
             height=45,
             command=self.start_update
