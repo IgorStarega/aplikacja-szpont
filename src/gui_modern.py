@@ -187,7 +187,11 @@ class ModernGUI:
         self.auto_updater = None
         try:
             if AutoUpdateManager is not None:
-                self.auto_updater = AutoUpdateManager(log_callback=self.log_message)
+                self.auto_updater = AutoUpdateManager(
+                    github_owner="IgorStarega",
+                    github_repo="aplikacja-szpont",
+                    log_callback=self.log_message
+                )
                 # Sprawdź aktualizacje w tle po starcie
                 self.root.after(2000, self._check_for_updates_on_startup)
         except Exception as e:

@@ -32,7 +32,7 @@ class AutoUpdateManager:
     BACKUP_DIR = "backups/app_backups"
 
     def __init__(self,
-                 github_owner: str = "user",
+                 github_owner: str = "IgorStarega",
                  github_repo: str = "aplikacja-szpont",
                  log_callback: Callable = None):
         """

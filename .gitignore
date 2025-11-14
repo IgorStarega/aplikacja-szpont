@@ -5,3 +5,9 @@ tests/
 build/
 dist/
 src/.data
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*~
+*.ps1~
