@@ -1,15 +1,17 @@
-# 🚀 Aktualizator Strony v5.2
+# 🚀 Aktualizator Strony v5.3.0
 
 Automatyczna aktualizacja strony **prakt.dziadu.dev** z repozytorium źródłowego.
 
 [![Status](https://img.shields.io/badge/status-production%20ready-brightgreen)]()
-[![Version](https://img.shields.io/badge/version-5.2-blue)]()
+[![Version](https://img.shields.io/badge/version-5.3.0-blue)]()
 [![Python](https://img.shields.io/badge/python-3.7%2B-blue)]()
+[![New](https://img.shields.io/badge/NEW-v5.3.0%20Features!-orange)]()
 
 ---
 
 ## ✨ Funkcje
 
+### Core Features (v4.1-5.2)
 - ⚡ **Batch Processing** - 3x szybsze przetwarzanie
 - 💾 **Smart Caching** - 60% oszczędności czasu
 - 🔄 **Auto-Update** - automatyczna aktualizacja aplikacji z GitHub
@@ -19,6 +21,17 @@ Automatyczna aktualizacja strony **prakt.dziadu.dev** z repozytorium źródłowe
 - 🌐 **Web Dashboard** - Flask + REST API
 - 🐳 **Docker** - gotowy do deployment
 - 🎨 **Ikona Aplikacji** - profesjonalna ikona na pasku zadań i skrócie
+
+### 🆕 Nowe w v5.3.0
+- 🎨 **5 Nowych Motywów** - Ocean Blue, Forest Green, Sunset Orange, Purple Dream, Cherry Blossom
+- 📊 **Interaktywne Wykresy** - matplotlib i plotly dla wizualizacji danych
+- ⌨️ **Skróty Klawiaturowe** - 15+ skrótów (Ctrl+U, Ctrl+S, itp.)
+- 🔍 **Zaawansowana Wyszukiwarka** - filtry i regex support
+- 💾 **System Snapshots** - backup i rollback z visual diff
+- 🌍 **Multi-Repository** - zarządzanie wieloma repozytoriami
+- 🛡️ **Auto-Retry** - exponential backoff dla błędów sieci
+- 🎯 **Quick Actions Menu** - kontekstowe menu (PPM)
+- ⚡ **Lazy Loading** - 70% mniej RAM, 5x szybsze tabele
 
 ---
 

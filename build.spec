@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 """
-PyInstaller Spec File dla Aktualizator Strony v5.2
+PyInstaller Spec File dla Aktualizator Strony v5.3.0
 Build standalone .exe bez Python'a - PRODUCTION READY
 
 Użycie:
@@ -60,14 +60,21 @@ a = Analysis(
         'paramiko',
         'GitPython',
         'git',
+        # v5.3.0 - Visualization
+        'matplotlib',
+        'matplotlib.pyplot',
+        'matplotlib.backends.backend_tkagg',
+        'plotly',
+        'plotly.graph_objs',
+        'plotly.express',
+        'kaleido',
+        'numpy',
+        'pandas',
     ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
     excludes=[
-        'matplotlib',
-        'numpy',
-        'pandas',
         'scipy',
         'pytest',
         'black',
